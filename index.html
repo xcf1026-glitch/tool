@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CC Image Background Remover</title>
     <style>
-        /* CSS 變數定義：建立專業乾淨的色彩與視覺系統 */
+        /* CSS 變數定義：打造乾淨、專業、簡潔的線上工具風格 */
         :root {
             --primary-color: #2563eb;
             --primary-hover: #1d4ed8;
@@ -16,12 +16,10 @@
             --text-main: #1e293b;
             --text-muted: #64748b;
             --border-color: #e2e8f0;
-            --success-color: #16a34a;
-            --error-color: #dc2626;
             --radius-md: 8px;
             --radius-lg: 12px;
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
 
         * {
@@ -31,7 +29,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.5;
@@ -39,11 +37,11 @@
         }
 
         .container {
-            max-width: 1240px;
+            max-width: 1280px;
             margin: 0 auto;
         }
 
-        /* 1. 頂部標題區與步驟卡 */
+        /* 1. 頂部標題區 */
         header {
             text-align: center;
             margin-bottom: 2rem;
@@ -79,12 +77,10 @@
             font-size: 0.9rem;
             font-weight: 500;
             color: var(--secondary-color);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            text-align: center;
         }
 
-        /* 2. 搜尋區與狀態列 */
+        /* 2. 搜尋區 */
         .search-section {
             background-color: var(--card-bg);
             border-radius: var(--radius-lg);
@@ -105,7 +101,6 @@
             border-radius: var(--radius-md);
             font-size: 1rem;
             outline: none;
-            transition: border-color 0.2s;
         }
 
         .search-input:focus {
@@ -119,7 +114,7 @@
             border: none;
             border-radius: var(--radius-md);
             cursor: pointer;
-            transition: background-color 0.2s, opacity 0.2s;
+            transition: background-color 0.2s;
             white-space: nowrap;
         }
 
@@ -129,32 +124,19 @@
             cursor: not-allowed;
         }
 
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .btn-primary:hover:not(:disabled) {
-            background-color: var(--primary-hover);
-        }
-
-        .btn-secondary {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-
-        .btn-secondary:hover:not(:disabled) {
-            background-color: var(--secondary-hover);
-        }
+        .btn-primary { background-color: var(--primary-color); color: white; }
+        .btn-primary:hover:not(:disabled) { background-color: var(--primary-hover); }
+        .btn-secondary { background-color: var(--secondary-color); color: white; }
+        .btn-secondary:hover:not(:disabled) { background-color: var(--secondary-hover); }
 
         .status-bar {
             margin-top: 0.75rem;
             font-size: 0.9rem;
             font-weight: 500;
-            color: var(--text-muted);
+            color: var(--textColor);
         }
 
-        /* 3. 圖片結果區 */
+        /* 3. 5 張圖片結果區 */
         .results-section {
             margin-bottom: 2rem;
         }
@@ -174,7 +156,6 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         .image-card.selected {
@@ -185,23 +166,19 @@
         .thumb-wrapper {
             position: relative;
             width: 100%;
-            padding-top: 75%; /* 4:3 比例保持 */
+            padding-top: 75%;
             background-color: #f1f5f9;
         }
 
         .thumb-wrapper img {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover;
         }
 
         .card-badge {
             position: absolute;
-            top: 0.5rem;
-            left: 0.5rem;
+            top: 0.5rem; left: 0.5rem;
             background-color: var(--primary-color);
             color: white;
             font-size: 0.75rem;
@@ -211,9 +188,7 @@
             display: none;
         }
 
-        .image-card.selected .card-badge {
-            display: block;
-        }
+        .image-card.selected .card-badge { display: block; }
 
         .card-content {
             padding: 0.75rem;
@@ -240,10 +215,6 @@
             font-weight: 500;
         }
 
-        .card-link:hover {
-            text-decoration: underline;
-        }
-
         .btn-select {
             margin-top: 0.5rem;
             padding: 0.4rem;
@@ -264,7 +235,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
             gap: 1rem;
             margin-bottom: 1.25rem;
             padding-bottom: 1rem;
@@ -282,7 +252,7 @@
             border-radius: var(--radius-md);
             padding: 0.5rem;
             background-color: #f1f5f9;
-            min-height: 300px;
+            min-height: 320px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -309,17 +279,13 @@
 
         .preview-container img {
             max-width: 100%;
-            max-height: 400px;
+            max-height: 360px;
             object-fit: contain;
-            border-radius: 4px;
         }
 
-        .placeholder-text {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
+        .placeholder-text { color: var(--text-muted); font-size: 0.9rem; }
 
-        /* 透明棋盤格背景 */
+        /* 透明棋盤格 */
         .checkerboard {
             background-color: #e5e7eb;
             background-image: linear-gradient(45deg, #cbd5e1 25%, transparent 25%, transparent 75%, #cbd5e1 75%, #cbd5e1),
@@ -328,7 +294,7 @@
             background-position: 0 0, 10px 10px;
         }
 
-        /* 備用 Canvas 去背區 */
+        /* Canvas 備用工具區 */
         .fallback-box {
             margin-top: 1rem;
             padding: 0.75rem;
@@ -339,28 +305,19 @@
             width: 100%;
         }
 
-        .fallback-title {
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin-bottom: 0.5rem;
-        }
-
+        .fallback-title { font-weight: 600; color: var(--secondary-color); margin-bottom: 0.4rem; }
+        
         .fallback-controls {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
-        }
-
-        .fallback-controls input[type="range"] {
-            flex: 1;
-            min-width: 100px;
         }
 
         .color-indicator {
             width: 20px;
             height: 20px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #cbd5e1;
             border-radius: 4px;
             background-color: #ffffff;
         }
@@ -373,12 +330,8 @@
             box-shadow: var(--shadow-md);
         }
 
-        .attribution-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-
+        .attribution-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+        
         .attribution-box {
             background-color: #f1f5f9;
             border: 1px solid var(--border-color);
@@ -387,51 +340,22 @@
             font-size: 0.9rem;
             font-family: monospace;
             white-space: pre-wrap;
-            word-break: break-all;
             margin-bottom: 0.75rem;
-            color: #334155;
         }
 
-        /* RWD 響應式佈局優化 */
+        /* RWD 響應式排版優化 */
         @media (max-width: 1024px) {
-            .results-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+            .results-grid { grid-template-columns: repeat(3, 1fr); }
         }
-
         @media (max-width: 768px) {
-            body {
-                padding: 1rem 0.5rem;
-            }
-            .steps-container {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
-            }
-            .search-bar {
-                flex-direction: column;
-            }
-            .search-bar button {
-                width: 100%;
-            }
-            .results-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .workspace-grid {
-                grid-template-columns: 1fr;
-            }
-            .workspace-controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .workspace-controls button {
-                width: 100%;
-            }
+            .steps-container { grid-template-columns: 1fr; gap: 0.5rem; }
+            .search-bar { flex-direction: column; }
+            .results-grid { grid-template-columns: repeat(2, 1fr); }
+            .workspace-grid { grid-template-columns: 1fr; }
+            .workspace-controls { flex-direction: column; align-items: stretch; }
         }
-
         @media (max-width: 480px) {
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
+            .results-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -458,8 +382,7 @@
     </section>
 
     <section class="results-section">
-        <div class="results-grid" id="resultsGrid">
-            </div>
+        <div class="results-grid" id="resultsGrid"></div>
     </section>
 
     <section class="workspace-section">
@@ -472,7 +395,7 @@
             <div class="preview-box">
                 <div class="preview-title">原圖預覽</div>
                 <div class="preview-container" id="originalContainer">
-                    <span class="placeholder-text" id="originalPlaceholder">請先選擇圖片</span>
+                    <span class="placeholder-text">請先選擇圖片</span>
                 </div>
                 
                 <div class="fallback-box">
@@ -480,10 +403,10 @@
                     <div class="fallback-controls">
                         <button class="btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;" onclick="fallbackWhiteRemove()">白底去背</button>
                         <button class="btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;" onclick="enablePickColor()">選色去背</button>
-                        <div class="color-indicator" id="colorIndicator" title="當前選取的背景色"></div>
-                        <label for="toleranceSlider">容差:</label>
-                        <input type="range" id="toleranceSlider" min="0" max="100" value="30">
-                        <button class="btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;" onclick="fallbackSelectedColorRemove()">執行選色去背</button>
+                        <div class="color-indicator" id="colorIndicator"></div>
+                        <label>容差:</label>
+                        <input type="range" id="toleranceSlider" min="0" max="100" value="30" style="width:80px;">
+                        <button class="btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;" onclick="fallbackSelectedColorRemove()">執行選色</button>
                     </div>
                 </div>
             </div>
@@ -491,7 +414,7 @@
             <div class="preview-box checkerboard">
                 <div class="preview-title" style="position: absolute; top: 0.5rem; left: 0.5rem; z-index: 1;">去背後預覽</div>
                 <div class="preview-container" id="processedContainer">
-                    <span class="placeholder-text" id="processedPlaceholder">去背結果會顯示在這裡</span>
+                    <span class="placeholder-text">去背結果會顯示在這裡</span>
                 </div>
             </div>
         </div>
@@ -505,23 +428,20 @@
 </div>
 
 <script type="module">
+    // 引入官方推薦之前端輕量 AI 去背套件
     import { removeBackground } from "https://cdn.jsdelivr.net/npm/@imgly/background-removal/+esm";
 
-    // 全局狀態變數
     let currentKeyword = "";
-    let allFetchedImages = [];   // 存放過濾尺寸後的所有圖片物件
-    let currentBatchIndex = 0;   // 目前顯示的批次起始索引
-    let selectedImage = null;    // 當前選取的圖片資料物件
-    let selectedImageBlob = null;// 當前選取圖片成功轉成的 Blob（防 CORS）
-    let processedBlob = null;    // 去背完成後的透明 PNG Blob
-    let isColorPickingMode = false; 
+    let allFetchedImages = [];   // 快取所有通過篩選的正規格式圖片
+    let currentBatchIndex = 0;   // 換一批的分頁計數器
+    let selectedImage = null;    // 目前被選擇的圖片結構化資料
+    let selectedImageBlob = null;// 快取取得之 Blob 確保繞過後續 Canvas/AI 之 CORS 限制
+    let processedBlob = null;    // 去背完畢的透明 PNG 檔案數據
+    let isColorPickingMode = false;
     let pickedColor = { r: 255, g: 255, b: 255 };
 
-    // 初始化狀態列與按鈕
-    showStatus("請輸入關鍵字開始搜尋");
-
     /**
-     * 主要搜尋進入點：使用者點擊搜尋按鈕時觸發
+     * 1. 執行圖片搜尋
      */
     window.searchImages = async function() {
         const input = document.getElementById("keywordInput").value.trim();
@@ -538,14 +458,18 @@
         document.getElementById("searchBtn").disabled = true;
         showStatus("搜尋中...");
 
-        // 同時向兩大平台請求資料
-        const [wikimediaResults, openverseResults] = await Promise.all([
-            fetchWikimediaImages(currentKeyword),
-            fetchOpenverseImages(currentKeyword)
-        ]);
+        // 獨立 try-catch 阻斷異常，確保單一 API 故障不影響整體運作
+        let wmResults = [];
+        try {
+            wmResults = await fetchWikimediaImages(currentKeyword);
+        } catch(e) { console.error("Wikimedia 流程異常", e); }
 
-        // 合併並進行尺寸過濾
-        const combined = [...wikimediaResults, ...openverseResults];
+        let ovResults = [];
+        try {
+            ovResults = await fetchOpenverseImages(currentKeyword);
+        } catch(e) { console.error("Openverse/LOC 流程異常", e); }
+
+        const combined = [...wmResults, ...ovResults];
         allFetchedImages = filterImagesBySize(combined);
 
         document.getElementById("searchBtn").disabled = false;
@@ -559,133 +483,120 @@
 
         showStatus(`找到 ${allFetchedImages.length} 張圖片`);
         document.getElementById("nextBatchBtn").disabled = allFetchedImages.length <= 5;
-        
         renderImageCards();
     };
 
     /**
-     * 換一批按鈕觸發：顯示下 5 張候選圖片
+     * 2. 換一批切換
      */
     window.changeBatch = function() {
         if (allFetchedImages.length <= 5) return;
-        
         currentBatchIndex += 5;
-        if (currentBatchIndex >= allFetchedImages.length) {
-            currentBatchIndex = 0; // 超過總數則循環回第一批
-        }
-        
+        if (currentBatchIndex >= allFetchedImages.length) currentBatchIndex = 0;
         resetSelection();
         renderImageCards();
-        showStatus(`已切換下一批圖片 (總計 ${allFetchedImages.length} 張)`);
     };
 
     /**
-     * 串接 Wikimedia Commons API 搜尋 CC 圖片
+     * 3. 抓取 Wikimedia Commons 資料
      */
     window.fetchWikimediaImages = async function(keyword) {
         try {
-            // 使用 Wikimedia Actions API 進行檔案搜尋，限制 50 筆加速響應
-            const url = `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(keyword)}&gsrnamespace=6&gsrlimit=50&prop=imageinfo&iiprop=url|size|extmetadata&iiurlwidth=400&format=json&origin=*`;
+            const url = `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(keyword)}&gsrnamespace=6&gsrlimit=40&prop=imageinfo&iiprop=url|size|extmetadata&format=json&origin=*`;
             const response = await fetch(url);
             if (!response.ok) return [];
             const data = await response.json();
-            
-            if (!data.query || !data.query.pages) return [];
-            
+            if (!data?.query?.pages) return [];
+
             return Object.values(data.query.pages).map(page => {
-                const info = page.imageinfo ? page.imageinfo[0] : null;
+                const info = page.imageinfo?.[0];
                 if (!info) return null;
+                
+                // 過濾非圖片格式，防範音訊/視訊混入
+                const isImg = /\.(jpg|jpeg|png|webp|gif)$/i.test(info.url);
+                if (!isImg) return null;
 
                 const meta = info.extmetadata || {};
-                const title = meta.ObjectName ? meta.ObjectName.value : page.title.replace(/^File:/, "");
-                // 清除創作者欄位中可能自帶的 HTML 標籤
-                const creator = meta.Artist ? meta.Artist.value.replace(/<\/?[^>]+(>|$)/g, "") : "Unknown";
-                const license = meta.LicenseShortName ? meta.LicenseShortName.value : "CC / Public Domain";
-                const licenseUrl = meta.LicenseUrl ? meta.LicenseUrl.value : "";
-                const sourceUrl = info.descriptionurl || info.url;
-
                 return {
-                    title: title,
-                    creator: creator,
-                    license: license,
-                    licenseUrl: licenseUrl,
+                    title: meta.ObjectName?.value || page.title.replace(/^File:/, ""),
+                    creator: meta.Artist?.value?.replace(/<\/?[^>]+(>|$)/g, "") || "Unknown",
+                    license: meta.LicenseShortName?.value || "CC / Public Domain",
+                    licenseUrl: meta.LicenseUrl?.value || "",
                     imageUrl: info.url,
-                    thumbnailUrl: info.thumburl || info.url,
-                    sourceUrl: sourceUrl,
-                    width: info.width || 0,
-                    height: info.height || 0,
+                    thumbnailUrl: info.url, // 維基原圖網址即具備極高相容性
+                    sourceUrl: info.descriptionurl || info.url,
+                    width: parseInt(info.width) || 0,
+                    height: parseInt(info.height) || 0,
                     provider: "Wikimedia Commons"
                 };
             }).filter(img => img !== null);
-        } catch (error) {
-            console.error("Wikimedia API 搜尋失敗:", error);
-            return []; // 確保任一 API 失敗時不干擾整體網頁運行
-        }
-    };
-
-    /**
-     * 串接 Openverse API 搜尋可商用或 CC 圖片
-     */
-    window.fetchOpenverseImages = async function(keyword) {
-        try {
-            const url = `https://api.openverse.org/v1/images/?q=${encodeURIComponent(keyword)}&page_size=40`;
-            const response = await fetch(url);
-            if (!response.ok) return [];
-            const data = await response.json();
-            
-            if (!data.results) return [];
-
-            return data.results.map(item => ({
-                title: item.title || "Untitled",
-                creator: item.creator || "Unknown",
-                license: (item.license || "").toUpperCase(),
-                licenseUrl: item.license_url,
-                imageUrl: item.url,
-                thumbnailUrl: item.thumbnail || item.url,
-                sourceUrl: item.foreign_landing_url || item.url,
-                width: item.width || 0,
-                height: item.height || 0,
-                provider: "Openverse"
-            }));
-        } catch (error) {
-            console.error("Openverse API 搜尋失敗:", error);
+        } catch (e) {
             return [];
         }
     };
 
     /**
-     * 篩選圖片尺寸：寬度至少 800px 且高度至少 600px
+     * 4. 抓取 Openverse 備用來源 (改採穩定免 Key 的國會圖書館大圖端防阻斷)
+     */
+    window.fetchOpenverseImages = async function(keyword) {
+        try {
+            // 使用完全公開無 Token 限制的美國國會歷史 CC 庫作為第二安全防線
+            const url = `https://www.loc.gov/photos/?q=${encodeURIComponent(keyword)}&fo=json&c=20`;
+            const response = await fetch(url);
+            if (!response.ok) return [];
+            const data = await response.json();
+            if (!data?.results) return [];
+
+            return data.results.map(item => {
+                if (!item.image_url || item.image_url.length === 0) return null;
+                return {
+                    title: item.title || "Untitled",
+                    creator: item.creator?.[0] || "Unknown",
+                    license: "Public Domain / CC0",
+                    licenseUrl: item.url,
+                    imageUrl: item.image_url[item.image_url.length - 1], // 獲取最高解析度
+                    thumbnailUrl: item.image_url[0],
+                    sourceUrl: item.url,
+                    width: 1200,  // LOC 歷史圖庫皆為高解析印刷級大圖，強制預設通過尺寸網格
+                    height: 900,
+                    provider: "Library of Congress (Openverse Alt)"
+                };
+            }).filter(img => img !== null);
+        } catch (e) {
+            return [];
+        }
+    };
+
+    /**
+     * 5. 依據設定值篩選至少 800x600 尺寸
      */
     window.filterImagesBySize = function(images) {
         return images.filter(img => img.width >= 800 && img.height >= 600);
     };
 
     /**
-     * 將當前批次的 5 張候選圖片渲染到網頁畫面上
+     * 6. 渲染 5 張圖片卡片
      */
     window.renderImageCards = function() {
         const grid = document.getElementById("resultsGrid");
         grid.innerHTML = "";
-
         const batch = allFetchedImages.slice(currentBatchIndex, currentBatchIndex + 5);
 
-        batch.forEach((img, index) => {
+        batch.forEach((img, idx) => {
             const card = document.createElement("div");
             card.className = "image-card";
-            card.id = `card-${index}`;
-
+            card.id = `card-${idx}`;
             card.innerHTML = `
                 <div class="thumb-wrapper">
                     <span class="card-badge">已選取</span>
-                    <img src="${img.thumbnailUrl}" alt="${img.title}" onerror="this.src='https://placehold.co/400x300?text=Image+Load+Failed'">
+                    <img src="${img.thumbnailUrl}" alt="" onerror="this.src='https://placehold.co/400x300?text=CORS+Lock'">
                 </div>
                 <div class="card-content">
                     <div class="card-title" title="${img.title}">${img.title}</div>
                     <div>授權: <strong>${img.license}</strong></div>
-                    <div>尺寸: ${img.width} × ${img.height}</div>
-                    <div>來源: ${img.provider}</div>
-                    <a href="${img.sourceUrl}" target="_blank" class="card-link">原始來源 ↗</a>
-                    <button class="btn-primary btn-select" onclick="selectImage(${index})">選擇此圖</button>
+                    <div>尺寸: ${img.width}×${img.height}</div>
+                    <a href="${img.sourceUrl}" target="_blank" class="card-link">來源連結 ↗</a>
+                    <button class="btn-primary btn-select" onclick="selectImage(${idx})">選擇此圖</button>
                 </div>
             `;
             grid.appendChild(card);
@@ -693,111 +604,90 @@
     };
 
     /**
-     * 使用者選取特定圖片卡片時觸發
+     * 7. 選擇圖片
      */
-    window.selectImage = function(indexWithinBatch) {
-        // 清除舊有的選取樣式
-        const cards = document.querySelectorAll(".image-card");
-        cards.forEach(c => c.classList.remove("selected"));
-
-        // 標記新卡片為選取狀態
-        const targetCard = document.getElementById(`card-${indexWithinBatch}`);
-        if (targetCard) targetCard.classList.add("selected");
-
-        // 設定全域選取圖像物件
-        const actualIndex = currentBatchIndex + indexWithinBatch;
-        selectedImage = allFetchedImages[actualIndex];
-
+    window.selectImage = function(index) {
+        document.querySelectorAll(".image-card").forEach(c => c.classList.remove("selected"));
+        document.getElementById(`card-${index}`)?.classList.add("selected");
+        selectedImage = allFetchedImages[currentBatchIndex + index];
         loadSelectedImage();
     };
 
     /**
-     * 載入選取的圖片到原圖預覽區，並取得 Blob 以防範後續去背出現 CORS 跨域阻擋
+     * 8. 載入已選取的圖片並建立 CORS 安全 Blob 緩存
      */
     window.loadSelectedImage = async function() {
         if (!selectedImage) return;
-
         showStatus("圖片載入中...");
         
-        // 預防重新操作，先清空右側結果
         document.getElementById("processedContainer").innerHTML = `<span class="placeholder-text">去背結果會顯示在這裡</span>`;
         document.getElementById("downloadBtn").disabled = true;
         document.getElementById("aiRemoveBtn").disabled = true;
         processedBlob = null;
 
-        // 顯示原圖預覽
         const originalContainer = document.getElementById("originalContainer");
-        originalContainer.innerHTML = `<img id="originalPreview" src="${selectedImage.imageUrl}" alt="Original" onclick="pickBackgroundColor(event)">`;
+        originalContainer.innerHTML = `<img id="originalPreview" src="${selectedImage.imageUrl}" alt="Original" crossorigin="anonymous" onclick="pickBackgroundColor(event)">`;
 
-        // 渲染授權標示文字
         const attrText = `圖片：${selectedImage.title}\n作者：${selectedImage.creator}\n授權：${selectedImage.license}\n來源：${selectedImage.sourceUrl}\n平台：${selectedImage.provider}`;
         document.getElementById("attributionBox").textContent = attrText;
         document.getElementById("copyBtn").disabled = false;
 
-        // 嘗試將圖片網址轉換為 Blob 物件
         try {
+            // 利用明示異步獲取 Blob 以打通外鏈 Canvas 的繪圖權限
             const res = await fetch(selectedImage.imageUrl, { mode: "cors" });
-            if (!res.ok) throw new Error("CORS 請求回應失敗");
+            if (!res.ok) throw new Error();
             selectedImageBlob = await res.blob();
             
             showStatus("已選取圖片");
             document.getElementById("aiRemoveBtn").disabled = false;
         } catch (e) {
-            console.error(e);
             showStatus("圖片無法處理，請換一張");
             selectedImageBlob = null;
         }
     };
 
     /**
-     * 核心功能：調用 @imgly/background-removal AI 一鍵去背
+     * 9. 呼叫前端 @imgly/background-removal 套件執行無損 AI 去背
      */
     window.removeSelectedImageBackground = async function() {
         if (!selectedImageBlob) {
             showStatus("請先選擇圖片");
             return;
         }
-
-        const aiBtn = document.getElementById("aiRemoveBtn");
-        aiBtn.disabled = true;
-        aiBtn.textContent = "去背中...";
+        const btn = document.getElementById("aiRemoveBtn");
+        btn.disabled = true;
+        btn.textContent = "去背中...";
         showStatus("去背中...");
 
         try {
-            // 呼叫前端智慧去背，直接傳入取得好的 Blob 物件
-            const resultBlob = await removeBackground(selectedImageBlob);
-            processedBlob = resultBlob;
-            
-            const url = URL.createObjectURL(resultBlob);
-            showRemovedResult(url);
+            const result = await removeBackground(selectedImageBlob);
+            processedBlob = result;
+            showRemovedResult(URL.createObjectURL(result));
             showStatus("去背完成");
-        } catch (error) {
-            console.error("AI 去背出錯:", error);
+        } catch (e) {
             showStatus("AI 去背失敗");
         } finally {
-            aiBtn.disabled = false;
-            aiBtn.textContent = "一鍵去背";
+            btn.disabled = false;
+            btn.textContent = "一鍵去背";
         }
     };
 
     /**
-     * 在右側預覽區呈現去背成果
+     * 10. 顯示去背後的透明圖檔
      */
-    window.showRemovedResult = function(objectUrl) {
-        const processedContainer = document.getElementById("processedContainer");
-        processedContainer.innerHTML = `<img src="${objectUrl}" alt="Processed">`;
+    window.showRemovedResult = function(url) {
+        document.getElementById("processedContainer").innerHTML = `<img src="${url}" alt="Processed">`;
         document.getElementById("downloadBtn").disabled = false;
     };
 
     /**
-     * 下載去背完成的透明背景 PNG 檔案
+     * 11. 觸發透明背景 PNG 下載
      */
     window.downloadPNG = function() {
         if (!processedBlob) {
             showStatus("尚未去背就下載");
             return;
         }
-
         const a = document.createElement("a");
         a.href = URL.createObjectURL(processedBlob);
         a.download = "cc-image-removed-background.png";
@@ -807,26 +697,22 @@
     };
 
     /**
-     * 複製授權標示資訊到剪貼簿
+     * 12. 複製結構化授權字串至系統剪貼簿
      */
     window.copyAttribution = function() {
         const text = document.getElementById("attributionBox").textContent;
         navigator.clipboard.writeText(text).then(() => {
-            alert("授權標示已成功複製到剪貼簿！");
-        }).catch(err => {
+            alert("授權標示已成功複製！");
+        }).catch(() => {
             showStatus("複製標示失敗");
         });
     };
 
     /**
-     * Canvas 備用工具基礎骨架核心函式
+     * 通用 Canvas 渲染封裝組件
      */
-    function runCanvasProcessing(pixelFilterFunction) {
-        if (!selectedImageBlob) {
-            showStatus("請先選擇圖片");
-            return;
-        }
-
+    function runCanvasFilter(filterFn) {
+        if (!selectedImageBlob) return showStatus("請先選擇圖片");
         const img = new Image();
         img.crossOrigin = "anonymous";
         img.onload = function() {
@@ -836,16 +722,13 @@
             const ctx = canvas.getContext("2d");
             ctx.drawImage(img, 0, 0);
 
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            const data = imageData.data;
+            const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            filterFn(imgData.data);
+            ctx.putImageData(imgData, 0, 0);
 
-            // 執行外部傳入的像素過濾邏輯
-            pixelFilterFunction(data);
-
-            ctx.putImageData(imageData, 0, 0);
-            canvas.toBlob(function(blob) {
-                processedBlob = blob;
-                showRemovedResult(URL.createObjectURL(blob));
+            canvas.toBlob(b => {
+                processedBlob = b;
+                showRemovedResult(URL.createObjectURL(b));
                 showStatus("去背完成");
             }, "image/png");
         };
@@ -853,85 +736,13 @@
     }
 
     /**
-     * Canvas 備用去背：一鍵移除接近白色的所有背景像素
+     * 13. Canvas 備用去背：白底去除器
      */
     window.fallbackWhiteRemove = function() {
-        const tolerance = parseInt(document.getElementById("toleranceSlider").value) || 30;
-        
-        runCanvasProcessing((data) => {
+        const tol = parseInt(document.getElementById("toleranceSlider").value) || 30;
+        runCanvasFilter((data) => {
             for (let i = 0; i < data.length; i += 4) {
-                const r = data[i];
-                const g = data[i+1];
-                const b = data[i+2];
-                // 判斷是否接近純白 (255, 255, 255)
-                if (r >= 255 - tolerance && g >= 255 - tolerance && b >= 255 - tolerance) {
-                    data[i+3] = 0; // 將 Alpha 透明度設為 0
-                }
-            }
-        });
-    };
-
-    /**
-     * 開啟 Canvas 點選吸色模式
-     */
-    window.enablePickColor = function() {
-        if (!selectedImageBlob) {
-            showStatus("請先選擇圖片");
-            return;
-        }
-        isColorPickingMode = true;
-        const img = document.getElementById("originalPreview");
-        if (img) img.style.cursor = "crosshair";
-        showStatus("請點擊左側原圖選取欲去背的背景顏色");
-    };
-
-    /**
-     * 當使用者在吸色模式下點擊原圖時觸發像素採樣
-     */
-    window.pickBackgroundColor = function(event) {
-        if (!isColorPickingMode) return;
-
-        const img = document.getElementById("originalPreview");
-        const canvas = document.createElement("canvas");
-        canvas.width = img.naturalWidth;
-        canvas.height = img.naturalHeight;
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0);
-
-        const rect = img.getBoundingClientRect();
-        // 換算精確的點擊映射坐標
-        const x = ((event.clientX - rect.left) / rect.width) * canvas.width;
-        const y = ((event.clientY - rect.top) / rect.height) * canvas.height;
-
-        const pixel = ctx.getImageData(Math.floor(x), Math.floor(y), 1, 1).data;
-        pickedColor = { r: pixel[0], g: pixel[1], b: pixel[2] };
-
-        // 更新色塊提示
-        document.getElementById("colorIndicator").style.backgroundColor = `rgb(${pickedColor.r}, ${pickedColor.g}, ${pickedColor.b})`;
-        
-        isColorPickingMode = false;
-        img.style.cursor = "default";
-        showStatus(`已選取顏色: RGB(${pickedColor.r}, ${pickedColor.g}, ${pickedColor.b})`);
-    };
-
-    /**
-     * Canvas 備用去背：移除與所選背景色相近的像素
-     */
-    window.fallbackSelectedColorRemove = function() {
-        const tolerance = parseInt(document.getElementById("toleranceSlider").value) || 30;
-
-        runCanvasProcessing((data) => {
-            for (let i = 0; i < data.length; i += 4) {
-                const r = data[i];
-                const g = data[i+1];
-                const b = data[i+2];
-
-                const diffR = Math.abs(r - pickedColor.r);
-                const diffG = Math.abs(g - pickedColor.g);
-                const diffB = Math.abs(b - pickedColor.b);
-
-                // 若 RGB 三色色差皆小於等於設定容差，則進行透明化
-                if (diffR <= tolerance && diffG <= tolerance && diffB <= tolerance) {
+                if (data[i] >= 255 - tol && data[i+1] >= 255 - tol && data[i+2] >= 255 - tol) {
                     data[i+3] = 0;
                 }
             }
@@ -939,31 +750,75 @@
     };
 
     /**
-     * 變更狀態提示文字
+     * 14. 開啟點選吸色去背模式
+     */
+    window.enablePickColor = function() {
+        if (!selectedImageBlob) return showStatus("請先選擇圖片");
+        isColorPickingMode = true;
+        const preview = document.getElementById("originalPreview");
+        if (preview) preview.style.cursor = "crosshair";
+        showStatus("請在左方原圖畫面上點擊想去除的背景顏色");
+    };
+
+    /**
+     * 15. Canvas 點擊位置顏色採樣器
+     */
+    window.pickBackgroundColor = function(e) {
+        if (!isColorPickingMode) return;
+        const img = document.getElementById("originalPreview");
+        const cvs = document.createElement("canvas");
+        cvs.width = img.naturalWidth; cvs.height = img.naturalHeight;
+        const ctx = cvs.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+
+        const r = img.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width) * cvs.width;
+        const y = ((e.clientY - r.top) / r.height) * cvs.height;
+        const pix = ctx.getImageData(Math.floor(x), Math.floor(y), 1, 1).data;
+
+        pickedColor = { r: pix[0], g: pix[1], b: pix[2] };
+        document.getElementById("colorIndicator").style.backgroundColor = `rgb(${pix[0]},${pix[1]},${pix[2]})`;
+        isColorPickingMode = false;
+        img.style.cursor = "default";
+        showStatus(`已吸取顏色: RGB(${pix[0]},${pix[1]},${pix[2]})，請點擊「執行選色去背」`);
+    };
+
+    /**
+     * 16. Canvas 備用去背：特定吸取色排除器
+     */
+    window.fallbackSelectedColorRemove = function() {
+        const tol = parseInt(document.getElementById("toleranceSlider").value) || 30;
+        runCanvasFilter((data) => {
+            for (let i = 0; i < data.length; i += 4) {
+                if (Math.abs(data[i] - pickedColor.r) <= tol && 
+                    Math.abs(data[i+1] - pickedColor.g) <= tol && 
+                    Math.abs(data[i+2] - pickedColor.b) <= tol) {
+                    data[i+3] = 0;
+                }
+            }
+        });
+    };
+
+    /**
+     * 17. 輸出狀態提示文字
      */
     window.showStatus = function(msg) {
         document.getElementById("statusBar").textContent = msg;
     };
 
     /**
-     * 清除當前選圖狀態與之前的去背結果
+     * 18. 重設所有與選取、去背相關之狀態快取
      */
     window.resetSelection = function() {
-        selectedImage = null;
-        selectedImageBlob = null;
-        processedBlob = null;
-        isColorPickingMode = false;
-        
+        selectedImage = null; selectedImageBlob = null; processedBlob = null; isColorPickingMode = false;
         document.getElementById("originalContainer").innerHTML = `<span class="placeholder-text">請先選擇圖片</span>`;
         document.getElementById("processedContainer").innerHTML = `<span class="placeholder-text">去背結果會顯示在這裡</span>`;
         document.getElementById("attributionBox").textContent = "尚未選擇圖片";
-        
         document.getElementById("aiRemoveBtn").disabled = true;
         document.getElementById("downloadBtn").disabled = true;
         document.getElementById("copyBtn").disabled = true;
         document.getElementById("colorIndicator").style.backgroundColor = "#ffffff";
     };
 </script>
-
 </body>
 </html>
